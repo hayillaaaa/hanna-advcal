@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-
-<!-- ✅ MOBILE FIX -->
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pink Christmas Advent</title>
+<title>Pink Advent Calendar</title>
 
-<!-- Pixel Fonts -->
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 
 <style>
@@ -28,12 +26,17 @@ body {
   justify-content: center;
   align-items: center;
   font-family: 'VT323', monospace;
-  overflow-x: hidden;
-  color: #fcd5e0;
+  overflow: hidden;
+  color: #bfdbfe;
 }
 
-/* ❄️ Pixel Snow */
-.snow { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+/* ❄️ SNOW */
+.snow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
 .snowflake {
   position: absolute;
   width: 6px;
@@ -41,26 +44,26 @@ body {
   background: white;
   animation: fall linear infinite;
 }
-@keyframes fall { to { transform: translateY(110vh); } }
+@keyframes fall {
+  to { transform: translateY(110vh); }
+}
 
 /* SCREENS */
 .screen {
   position: fixed;
   inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: rgba(236,72,153,0.95);
-  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
+  z-index: 5;
   text-align: center;
 }
 
-/* PRESS START */
 .start-text {
   font-family: 'Press Start 2P', cursive;
   font-size: 1.4rem;
-  color: #fcd5e0;
   text-shadow: 4px 4px #be185d;
   animation: blink 1s steps(1) infinite;
 }
@@ -68,49 +71,53 @@ body {
 
 /* PASSWORD */
 .password-box {
-  background: #fcd5e0;
+  background: #ffe4ef;
   color: #be185d;
   padding: 24px;
   border: 6px solid #be185d;
   box-shadow: 10px 10px #be185d;
-  max-width: 340px;
   width: 90%;
+  max-width: 340px;
 }
 .password-box input {
   width: 100%;
   padding: 12px;
   margin-top: 12px;
+  font-size: 1.3rem;
   font-family: 'VT323', monospace;
-  font-size: 1.4rem;
 }
 .password-box button {
   margin-top: 12px;
-  font-family: 'Press Start 2P', cursive;
+  width: 100%;
   padding: 10px;
+  font-family: 'Press Start 2P', cursive;
   background: #ec4899;
   border: 4px solid #be185d;
   cursor: pointer;
 }
-.password-box p { color: red; display: none; }
+.password-box p {
+  color: red;
+  display: none;
+}
 
 /* MAIN */
 .wrapper {
-  max-width: 960px;
   width: 100%;
+  max-width: 960px;
   padding: 20px;
-  z-index: 2;
   display: none;
+  z-index: 2;
 }
 
 h1 {
   text-align: center;
   font-family: 'Press Start 2P', cursive;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-bottom: 20px;
-  text-shadow: 4px 4px #be185d;
+  text-shadow: 3px 3px #be185d;
 }
 
-/* CALENDAR GRID */
+/* CALENDAR */
 .calendar {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -122,7 +129,6 @@ h1 {
   padding-top: 100%;
   cursor: pointer;
 }
-
 .day-inner {
   position: absolute;
   inset: 0;
@@ -133,7 +139,7 @@ h1 {
   align-items: center;
   justify-content: center;
   font-family: 'Press Start 2P', cursive;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 /* POPUP */
@@ -146,6 +152,7 @@ h1 {
   justify-content: center;
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.3s;
   z-index: 4;
 }
 .overlay.active {
@@ -154,7 +161,7 @@ h1 {
 }
 
 .popup-card {
-  background: #fcd5e0;
+  background: #ffe4ef;
   color: #be185d;
   width: 92%;
   max-width: 480px;
@@ -162,37 +169,30 @@ h1 {
   border: 6px solid #be185d;
   box-shadow: 10px 10px #be185d;
   transform: scale(0.6);
-  transition: transform 0.3s steps(5);
+  transition: transform 0.3s ease;
   font-size: 1.4rem;
 }
-.overlay.active .popup-card { transform: scale(1); }
+.overlay.active .popup-card {
+  transform: scale(1);
+}
 
 .close-btn {
   font-family: 'Press Start 2P', cursive;
   background: #ec4899;
   border: 4px solid #be185d;
   padding: 8px;
-  cursor: pointer;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
-/* 📱 MOBILE FIXES */
+/* 📱 MOBILE */
 @media (max-width: 768px) {
-  .calendar {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  .calendar { grid-template-columns: repeat(3, 1fr); }
+  h1 { font-size: 1rem; }
+}
 
-  h1 {
-    font-size: 1rem;
-  }
-
-  .day-inner {
-    font-size: 0.75rem;
-  }
-
-  .start-text {
-    font-size: 1.2rem;
-  }
+@media (max-width: 430px) {
+  .calendar { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
@@ -222,6 +222,7 @@ h1 {
   <div class="calendar" id="calendar"></div>
 </div>
 
+<!-- POPUP -->
 <div class="overlay" id="overlay">
   <div class="popup-card">
     <button class="close-btn" id="closeBtn">CLOSE</button>
@@ -230,11 +231,40 @@ h1 {
 </div>
 
 <script>
+/* 🔑 PASSWORD */
 const CORRECT_PASSWORD = "123";
 
+/* 🎁 CUSTOM LETTERS — EDIT THESE */
+const letters = [
+  "Day 1: Your first little Christmas surprise 💖",
+  "Day 2: I hope today makes you smile ✨",
+  "Day 3: You are so loved 🎄",
+  "Day 4: A reminder that you are amazing 💫",
+  "Day 5: Cozy hugs and warm thoughts 🤍",
+  "Day 6: Thank you for existing 💕",
+  "Day 7: You make my days brighter ☀️",
+  "Day 8: Pixel kisses just for you 😘",
+  "Day 9: Christmas is better with you 🎁",
+  "Day 10: Keep being your wonderful self 💖",
+  "Day 11: A tiny note full of love 💌",
+  "Day 12: Halfway to Christmas magic ✨",
+  "Day 13: You’re my favorite surprise 🎀",
+  "Day 14: Sending warmth your way 🤍",
+  "Day 15: You mean so much to me 💕",
+  "Day 16: Almost there 🎄",
+  "Day 17: Thank you for every smile 😊",
+  "Day 18: Christmas joy unlocked 🎮",
+  "Day 19: You are cherished 💖",
+  "Day 20: Wrapped in love 🎁",
+  "Day 21: Winter magic feels better with you ❄️",
+  "Day 22: Just a little more ✨",
+  "Day 23: One more sleep 🎄",
+  "Day 24: Merry Christmas, my favorite person ❤️"
+];
+
+/* START */
 const startScreen = document.getElementById("startScreen");
 const passwordScreen = document.getElementById("passwordScreen");
-
 startScreen.onclick = () => {
   startScreen.style.display = "none";
   passwordScreen.style.display = "flex";
@@ -251,41 +281,38 @@ function checkPassword() {
   }
 }
 
-/* ❄️ SNOW */
-const snow = document.getElementById("snow");
-for (let i = 0; i < 90; i++) {
-  const f = document.createElement("div");
-  f.className = "snowflake";
-  f.style.left = Math.random() * 100 + "vw";
-  f.style.animationDuration = Math.random() * 10 + 6 + "s";
-  f.style.animationDelay = Math.random() * -20 + "s";
-  snow.appendChild(f);
-}
-
-/* LETTERS */
-const letters = Array.from({ length: 24 }, (_, i) => ({
-  day: i + 1,
-  text: `This is your special message for Day ${i + 1}. 💖`
-}));
-
+/* CALENDAR */
 const calendar = document.getElementById("calendar");
 const overlay = document.getElementById("overlay");
 const popupContent = document.getElementById("popupContent");
 const closeBtn = document.getElementById("closeBtn");
 
-letters.forEach(letter => {
+letters.forEach((text, i) => {
   const day = document.createElement("div");
   day.className = "day";
-  day.innerHTML = `<div class="day-inner">${letter.day}</div>`;
+  day.innerHTML = `<div class="day-inner">${i + 1}</div>`;
   day.onclick = () => {
-    popupContent.innerHTML = `<h3>DAY ${letter.day}</h3><p>${letter.text}</p>`;
+    popupContent.innerHTML = `<h3>DAY ${i + 1}</h3><p>${text}</p>`;
     overlay.classList.add("active");
   };
   calendar.appendChild(day);
 });
 
 closeBtn.onclick = () => overlay.classList.remove("active");
-overlay.onclick = e => { if (e.target === overlay) overlay.classList.remove("active"); };
+overlay.onclick = e => {
+  if (e.target === overlay) overlay.classList.remove("active");
+};
+
+/* SNOW */
+const snow = document.getElementById("snow");
+for (let i = 0; i < 80; i++) {
+  const flake = document.createElement("div");
+  flake.className = "snowflake";
+  flake.style.left = Math.random() * 100 + "vw";
+  flake.style.animationDuration = Math.random() * 10 + 6 + "s";
+  flake.style.animationDelay = Math.random() * -20 + "s";
+  snow.appendChild(flake);
+}
 </script>
 
 </body>
